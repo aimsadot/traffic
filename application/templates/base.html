@@ -1,8 +1,9 @@
 <!DOCTYPE>
 <html>
 <head>
+    {% set vars = { 'page-icon': none } %}
     <meta charset="UTF-8"/>
-    <title>Admin Panel UI</title>
+    <title>iTraffic - {% block pagetitle %} {% endblock %}</title>
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
           integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
@@ -53,6 +54,10 @@
                        aria-current="page"
                        href="{{ item.url }}" data-bs-toggle="tooltip" data-bs-placement="right"
                        title="{{ item.label }}">
+                        {% if item.is_active %}
+                        {% if vars.update({'page-icon': item.html_attrs.icon}) %} {% endif %}
+                        {% if vars.update({'current-page': item.label}) %} {% endif %}
+                        {% endif %}
                         <i data-bs-toggle="tooltip" data-bs-placement="right"
                        title="{{ item.label }}" class="bi bi-{{ item.html_attrs.icon }}"></i>
                     </a>
@@ -63,7 +68,26 @@
     </div>
     <!-- End Sidebar  -->
     <div class="main col-11">
-        {% block content %} {% endblock %}
+        <div class="row">
+            <div class="col">
+                <section id="page-head" class="border-bottom">
+                    <div class="row">
+                        <div class="col">
+                            {% block pagehead %}
+
+                            {% endblock %}
+                        </div>
+                        <div class="col text-end">
+                            {% block pagetab %} {% endblock %}
+                        </div>
+                    </div>
+                </section>
+               <section>
+                   {% block content %} {% endblock %}
+               </section>
+            </div>
+        </div>
+
     </div>
 </div>
 <script>

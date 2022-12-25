@@ -80,7 +80,7 @@ def create_app():
     # register menu items
     nav = Navigation(app)
     nav.Bar('top', [
-        nav.Item('Home', 'view.home', html_attrs={'icon': 'geo-alt'}),
+        nav.Item('Home', 'view.home', html_attrs={'icon': 'house-door'}),
         nav.Item('Live', 'view.video', html_attrs={'icon': 'webcam'}),
         nav.Item('Analytics', 'view.analytics', html_attrs={'icon': 'bar-chart-line'}),
         nav.Item('Clips', 'view.clips', html_attrs={'icon': 'record'}),
