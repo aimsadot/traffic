@@ -71,14 +71,20 @@ def create_app():
     # register views
     from .view import view
     from .auth import auth
+    from .video import video
 
     app.register_blueprint(view, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
+    app.register_blueprint(video, url_prefix='/')
 
     # register menu items
     nav = Navigation(app)
     nav.Bar('top', [
-        nav.Item('Home', 'view.home', html_attrs={'icon': 'home', 'id': 'no'})
+        nav.Item('Home', 'view.home', html_attrs={'icon': 'geo-alt'}),
+        nav.Item('Live', 'view.video', html_attrs={'icon': 'webcam'}),
+        nav.Item('Analytics', 'view.analytics', html_attrs={'icon': 'bar-chart-line'}),
+        nav.Item('Clips', 'view.clips', html_attrs={'icon': 'record'}),
+        nav.Item('Settings', 'view.settings', html_attrs={'icon': 'gear'})
     ])
 
     return app
