@@ -15,7 +15,6 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
-                flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
                 return redirect(url_for('view.home'))
             else:
@@ -30,4 +29,29 @@ def login():
 @login_required
 def logout():
     logout_user()
+    flash('Logout successfully!', category='success')
     return redirect(url_for('auth.login'))
+
+
+@auth.route('/create-user', methods=['GET', 'POST'])
+@login_required
+def create_user():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password1 = request.form.get('password1')
+        password2 = request.form.get('password2')
+
+        import re
+
+        regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+        if not re.fullmatch(regex, email):
+            flash('Emtpy email address.', category='error')
+        elif password1 != password2:
+            flash('Password does not match!.', category='error')
+        elif len(password1) < 4:
+            flash('Password must be of minimum length 4')
+        else:
+            from .dal import add_user
+            if not add_user(email, password1):
+                flash('Email already exists', category='error')
+    return render_template('signup.html')
