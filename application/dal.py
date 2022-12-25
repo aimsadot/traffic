@@ -21,7 +21,7 @@ def get_all_areas():
 
 
 def get_all_media_by_type(media_type):
-    return Media.query.filter_by(media_type=media_type).order_by(Area.time_updated.desc())
+    return Media.query.filter_by(media_type=media_type).all().order_by(Area.time_updated.desc())
 
 
 def add_user(email, password):
