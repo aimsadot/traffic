@@ -6,6 +6,11 @@ body {
 nav {
   background-color: white;
 }
+
+nav.tab-nav{
+  background: inherit;
+}
+
 .search-form {
   width: 50%;
 }
@@ -52,9 +57,9 @@ section {
   margin-bottom: 10px;
 }
 .main {
-      padding: 1rem;
-    padding-left: 0px;
-    padding-top: calc(1rem + 60px);
+  padding: 1rem;
+  padding-left: 0px;
+  padding-top: calc(1rem + 60px);
 }
 .main .first-row, .main .second-row {
   padding-bottom: 3rem;
@@ -105,4 +110,13 @@ section {
 
 .tooltip{
   z-index: 1000000;
+}
+
+.tab-nav .nav-link{
+  outline: none;
+  box-shadow: none;
+}
+
+.nav-tabs {
+    border: none;
 }
