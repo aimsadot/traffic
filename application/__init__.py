@@ -13,8 +13,8 @@ RECORDS_FOLDER = "./records"
 SECRET_KEY = "The World is not Enough"
 
 
-def create_database(app):
-    if path.exists('application/' + DB_NAME):
+def create_database(app, drop=False):
+    if drop:
         with app.app_context():
             print("droped database")
             db.drop_all()
@@ -34,6 +34,14 @@ def create_folders():
         os.mkdir(RECORDS_FOLDER)
 
 
+def create_users():
+    from .dal import add_user
+    from .models import User
+    from .seed import initial_users
+    for item in initial_users:
+        add_user(item['email'], item['pass'])
+
+
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = SECRET_KEY
@@ -46,7 +54,7 @@ def create_app():
     db.init_app(app)
 
     from .models import User
-    create_database(app)
+    create_database(app, True)
 
     # register login models and intialize Login Manager
     login_manager = LoginManager()
