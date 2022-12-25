@@ -28,8 +28,11 @@ def add_user(email, password):
     user = User.query.filter_by(email=email).first()
     result = False
     if not user:
+        user_id = None
+        if current_user:
+            user_id = current_user.id
         db.session.add(User(email=email, password=generate_password_hash(
-            password, method='sha256', user_id=current_user.id)))
+            password, method='sha256'), user_id=user_id))
         db.session.commit()
         result = True
     return result
