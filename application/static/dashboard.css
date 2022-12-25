@@ -102,3 +102,7 @@ section {
 .badge {
   font-size: 18px;
 }
+
+.tooltip{
+  z-index: 1000000;
+}
