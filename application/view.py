@@ -10,25 +10,25 @@ def home():
     return render_template("home.html", current_user=current_user)
 
 
-@view.route('/analytics', methods=['GET'])
-@login_required
-def analytics():
-    pass
-
-
 @view.route('/settings', methods=['GET'])
 @login_required
 def settings():
-    pass
+    return render_template("settings.html")
+
+
+@view.route('/analytics', methods=['GET'])
+@login_required
+def analytics():
+    return render_template("video.html", page_type="Analytics", media_name="Dummy Video", area_name="Dhaka")
 
 
 @view.route('/clips', methods=['GET'])
 @login_required
 def clips():
-    pass
+    return render_template("video.html", page_type="Recorded Clips", media_name="Dummy Clip", area_name="Dhaka")
 
 
 @view.route('/live', methods=['GET'])
 @login_required
 def video():
-    pass
+    return render_template("video.html", page_type="Live", media_name="Dummy Live", area_name="Dhaka")
