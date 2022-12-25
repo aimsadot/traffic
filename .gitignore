@@ -5,6 +5,9 @@ __pycache__/
 
 .idea
 
+*.avi
+*.mp4
+
 # C extensions
 *.so
 
