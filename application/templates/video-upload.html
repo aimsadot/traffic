@@ -1,4 +1,4 @@
-{% from 'form-macro.html' import text_field, select_field %}
+{% from 'form-macro.html' import text_field, select_field_area %}
 
 <div class="card rounded-0">
     <div class="card-header d-flex">
@@ -38,7 +38,7 @@
         </table>
     </div>
 </div>
-<form method="post" action="{{ url_for('view.settings_create_rtsp_link') }}" enctype=multipart/form-data>
+<form method="post" action="{{ url_for('view.settings_upload_video') }}" enctype=multipart/form-data>
     <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -49,15 +49,20 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        {{ text_field("add_rtsp_link_name", "", "Name", "text", "", "name") }}
+                        {{ text_field("add_video_name", "", "Name", "text", "", "video_name") }}
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="inputGroupFile02">Upload a video file (<i class="bi bi-filetype-mp4"></i>)</label>
                         <input type="file" name="file" class="form-control" id="inputGroupFile02">
-
                     </div>
                     <div class="mb-3">
-                        {{ select_field("select-area-for-rtsp", "", "Select Area", "area_id", areas ) }}
+                         <label class="form-label" for="map2">Select Location of the video (please click on map)</label>
+                        <div id="map2" class="map"></div>
+                        <input type="hidden" name="video_lat">
+                        <input type="hidden" name="video_long">
+                    </div>
+                    <div class="mb-3">
+                       {{ select_field_area("select-area-for-video", "", "Select Area", "area_id", areas ) }}
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -14,7 +14,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+          integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+          crossorigin=""/>
     <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.1.0/dist/geosearch.css"/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-geosearch@3.1.0/dist/bundle.min.js"></script>
+
 </head>
 <body>
 <!-- Top Nav -->
@@ -49,8 +56,7 @@
                 <li class="nav-item">
                     <a class="nav-link {{ 'active' if item.is_active else '' }}"
                        aria-current="page"
-                       href="{{ item.url }}" data-bs-toggle="tooltip" data-bs-placement="right"
-                       title="{{ item.label }}">
+                       href="{{ item.url }}">
                         {% if item.is_active %}
                         {% if vars.update({'page-icon': item.html_attrs.icon}) %} {% endif %}
                         {% if vars.update({'current-page': item.label}) %} {% endif %}
@@ -93,6 +99,7 @@
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"
         integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='dashboard.js')}}"></script>
 <script>
     let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -112,8 +119,13 @@
     $(document).ready(function () {
         $(".toast").toast('show');
         $('.d-table').DataTable();
+
+    });
+
+    const myIcon = L.icon({
+        iconUrl: "{{ url_for('static', filename='images/map.png') }}",
     });
 </script>
-
+{% block page_script %} {% endblock %}
 </body>
 </html>

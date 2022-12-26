@@ -19,3 +19,14 @@
  {% endfor %}
 </select>
 {% endmacro %}
+
+
+{% macro select_field_area(select_field_id1, extra_cls, label, name, options) %}
+<label for="{{ select_field_id1 }}" class="form-label">{{ label }}</label>
+<select id="{{ select_field_id1 }}" class="form-select" aria-label="{{ label }}" name="{{ name }}" required>
+ <option selected>Select a area</option>
+ {% for item in options %}
+  <option value="{{item['id']}}" data-lat="{{item.lat}}" data-long="{{item.lng}}">{{item['name']}}</option>
+ {% endfor %}
+</select>
+{% endmacro %}
