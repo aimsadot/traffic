@@ -56,9 +56,12 @@ def add_media(name, path, media_type, area_id):
     path = path.strip()
     media = Media.query.filter(func.lower(Media.path) == func.lower(path)).first()
     area = get_area_by_id(area_id)
-    if (not media) and (not area):
+    if media is None and area is not None:
         media = Media(name=name, path=path, media_type=media_type, area_id=area_id, user_id=current_user.id)
-        db.session.add(media)
-        db.session.commit()
-        result = True
+        try:
+            db.session.add(media)
+            db.session.commit()
+            result = True
+        except:
+            db.session.rollback()
     return result

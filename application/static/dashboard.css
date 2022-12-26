@@ -59,7 +59,7 @@ section {
 .main {
   padding: 1rem;
   padding-left: 0px;
-  padding-top: calc(1rem + 60px);
+  padding-top: 60px;
 }
 .main .first-row, .main .second-row {
   padding-bottom: 3rem;

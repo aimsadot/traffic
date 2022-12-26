@@ -26,6 +26,9 @@ class User(db.Model, UserMixin):
 class Area(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), nullable=False, unique=True)
+    lat = db.Column(db.Float, nullable=True)
+    long = db.Column(db.Float, nullable=True)
+    description = db.Column(db.String(300), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     medias = db.relationship('Media')
     time_created = db.Column(DateTime(timezone=True), server_default=func.now())
