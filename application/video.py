@@ -7,6 +7,8 @@ import time
 import sys
 import numpy as np
 from scipy.spatial import distance as dist
+from .dal import *
+from .viewmodel import *
 
 video = Blueprint('video', __name__)
 
@@ -225,3 +227,24 @@ def create_video():
 @video.route('/check-camera', methods=['GET'])
 def check_camera():
     pass
+
+
+@video.route('/analytics', methods=['GET'])
+@login_required
+def analytics():
+    vid = request.args.get('vid')
+    if not vid:
+        vid = 1
+    return render_template("video.html", media_name="Dummy Video", area_name="Dhaka", media=None)
+
+
+@video.route('/clips', methods=['GET'])
+@login_required
+def clips():
+    return render_template("video.html", media_name="Dummy Clip", area_name="Dhaka", media=None)
+
+
+@video.route('/live', methods=['GET'])
+@login_required
+def play_video():
+    return render_template("video.html", media_name="Dummy Live", area_name="Dhaka", media=None)

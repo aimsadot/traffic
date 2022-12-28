@@ -1,7 +1,7 @@
 <!DOCTYPE>
 <html>
 <head>
-    {% set vars = { 'page-icon': none } %}
+    {% set vars = { 'page-icon': none, 'current-page': none } %}
     <meta charset="UTF-8"/>
     <title>iTraffic - {% block pagetitle %} {% endblock %}</title>
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
