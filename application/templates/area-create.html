@@ -1,0 +1,80 @@
+{% from 'form-macro.html' import text_field, select_field %}
+
+<div class="card rounded-0">
+    <div class="card-header d-flex">
+        <div class="flex-fill">
+            <i class="bi bi-geo-alt"></i>
+            <strong class="me-auto">&nbsp; Area List</strong>
+        </div>
+        <div class="d-grid gap-2 d-flex justify-content-end">
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i
+                    class="bi bi-plus-lg"></i></button>
+        </div>
+
+    </div>
+    <div class="card-body">
+        <table class="table d-table" id="rtsp-table">
+            <thead>
+            <th>#</th>
+            <th>Name</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Created By</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+            <th class="text-end">Action</th>
+            </thead>
+            <tbody>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td class="text-end ">
+                <a href="#" class="btn btn-sm text-success"><i class="bi bi-play-circle"></i></a>
+                <a href="#" class="btn btn-sm"><i class="bi bi-trash"></i></a>
+            </td>
+            </tbody>
+        </table>
+    </div>
+</div>
+<form method="post" action="{{ url_for('view.settings_create_rtsp_link') }}" enctype=multipart/form-data>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2"><i class="bi bi-geo-alt"></i> Create a
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        {{ text_field("area_name", "", "Name", "text", "", "name") }}
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                {{ text_field("area_lat", "", "Latitude", "text", "", "lat") }}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                {{ text_field("area_long", "", "Longitude", "text", "", "long") }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="inputTextField">Description (<i
+                                class="bi bi-filetype-mp4"></i>)</label>
+                        <textarea id="inputTextField" class="form-control" name="des" placeholder="Description about the area"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
